@@ -1,3 +1,8 @@
+## User Information System
+
+This project is a simple User Information System built with Laravel. It demonstrates basic CRUD (Create, Read, Update, Delete) operations for user data, using Tailwind CSS and DaisyUI for a modern, responsive interface. The system allows you to view a list of users, see individual user profiles, and is structured for easy extension to include user creation, editing, and deletion features. The UI leverages reusable Blade components and follows beginner-friendly PHP OOP and Laravel best practices.
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
