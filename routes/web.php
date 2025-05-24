@@ -16,6 +16,10 @@ Route::get('/user/{id}', function ($id) {
 
     $user = Users::find($id);
 
+    if (!$user) {
+        abort(404);
+    }
+
     return view('user', ['user' => $user]);
 });
 
