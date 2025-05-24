@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Users;
+use App\Models\User;
+use App\Models\User_details;
+use App\Models\Addresses;
 
 
 Route::get('/', function () {
@@ -9,12 +11,12 @@ Route::get('/', function () {
 });
 
 Route::get('/users', function () {
-    return view('users', ['users' => Users::all()]);
+    return view('users', ['users' => User::all()]);
 });
 
 Route::get('/user/{id}', function ($id) {
 
-    $user = Users::find($id);
+    $user = User::with('userDetails', 'userAddress')->find($id);
 
     if (!$user) {
         abort(404);
