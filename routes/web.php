@@ -11,7 +11,9 @@ Route::get('/', function () {
 });
 
 Route::get('/users', function () {
-    return view('users', ['users' => User::all()]);
+    return view('users', ['users' => User::orderBy('name', 'asc')
+    ->get()
+]);
 });
 
 Route::get('/user/{id}', function ($id) {
