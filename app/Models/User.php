@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\UserDetails;
+use App\Models\Addresses;
 
 class User extends Authenticatable
 {
@@ -47,12 +49,12 @@ class User extends Authenticatable
         ];
     }
 
-    function userDetails(): HasOne
+    public function userDetails(): HasOne
     {
-        return $this->hasOne(User_details::class, 'user_id');
+        return $this->hasOne(UserDetails::class, 'user_id');
     }
     
-    function userAddress(): HasOne
+    public function userAddress(): HasOne
     {
         return $this->hasOne(Addresses::class, 'user_id');
     }

@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class User_details extends Model
+class UserDetails extends Model
 {
+    use HasFactory;
     protected $table = 'user_details';
     protected $fillable = [
         'contact',
