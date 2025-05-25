@@ -16,7 +16,7 @@ class UsersWithRelationsSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(100)
+        User::factory()
         ->has(UserDetails::factory(), 'userDetails')
         ->has(Addresses::factory(), 'userAddress')
         ->create();
