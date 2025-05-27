@@ -12,7 +12,7 @@ Route::get('/', function () {
 
 Route::get('/users', function () {
     return view('users', ['users' => User::orderBy('name', 'asc')
-    ->get()
+    ->paginate(10)
 ]);
 });
 
