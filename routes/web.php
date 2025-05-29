@@ -2,8 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
-use App\Models\User_details;
-use App\Models\Addresses;
+
 
 
 Route::get('/', function () {
@@ -11,10 +10,18 @@ Route::get('/', function () {
 });
 
 Route::get('/users', function () {
-    return view('users', ['users' => User::orderBy('name', 'asc')
-    ->paginate(10)
-]);
+    $users = User::orderBy('name', 'asc')
+    ->paginate(10);
+
+    return view('users/index', [
+        'users' => $users
+    ]);
 });
+
+Route::get('/user/create', function () {
+    dd('Welcome to create user page');
+});
+
 
 Route::get('/user/{id}', function ($id) {
 
@@ -24,8 +31,9 @@ Route::get('/user/{id}', function ($id) {
         abort(404);
     }
 
-    return view('user', ['user' => $user]);
+    return view('users/show', ['user' => $user]);
 });
+
 
 
 Route::get('/about', function () {
