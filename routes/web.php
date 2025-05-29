@@ -16,7 +16,6 @@ Route::get('/users', function () {
     $users = User::orderBy('name', 'asc')
     ->paginate(10);
 
-    // Add a flash toastr message for viewing users
     session()->flash('info', 'User list loaded successfully.');
 
     return view('users/index', [

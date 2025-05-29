@@ -11,6 +11,8 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -19,7 +21,7 @@
 <body class="h-full">
     <div class="min-h-full">
         @include('components.flash-messages')
-        
+
         <nav class="bg-gray-800">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="flex h-16 items-center justify-between">
@@ -105,7 +107,7 @@
             <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 flex items-center justify-between">
                 <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $headingTitle }}</h1>
                 @if (request()->is('users'))
-                    <a class="btn btn-primary" href="/users/create">Create User</a>
+                    <x-button type="a" class="btn btn-primary btn-sm" href="/users/create">Create User</x-button>
                 @endif
             </div>
         </header>

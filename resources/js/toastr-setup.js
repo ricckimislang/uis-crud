@@ -1,20 +1,19 @@
 import toastr from 'toastr';
-import 'toastr/build/toastr.min.css';
 
 // Toastr configuration
 toastr.options = {
     "closeButton": true,
     "debug": false,
     "newestOnTop": true,
-    "progressBar": true,
+    "progressBar": false,
     "positionClass": "toast-top-right",
     "preventDuplicates": false,
     "onclick": null,
-    "showDuration": "300",
+    "showDuration": "2000",
     "hideDuration": "1000",
-    "timeOut": "5000",
+    "timeOut": "3000",
     "extendedTimeOut": "1000",
-    "showEasing": "swing",
+    "showEasing": "linear",
     "hideEasing": "linear",
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
