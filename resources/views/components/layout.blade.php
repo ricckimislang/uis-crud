@@ -13,6 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="h-full">
@@ -99,10 +100,14 @@
         </nav>
 
         <header class="bg-white shadow-sm">
-            <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 flex items-center justify-between">
                 <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $headingTitle }}</h1>
+                @if (request()->is('users'))
+                    <a class="btn btn-primary" href="/users/create">Create User</a>
+                @endif
             </div>
         </header>
+
         <main>
             <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                 {{ $slot }}

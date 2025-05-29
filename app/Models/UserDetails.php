@@ -9,12 +9,7 @@ class UserDetails extends Model
 {
     use HasFactory;
     protected $table = 'user_details';
-    protected $fillable = [
-        'contact',
-        'age',
-        'gender',
-        'occupation',
-    ];
+    protected $guarded = [];
 
 }
 

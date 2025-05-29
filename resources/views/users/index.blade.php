@@ -10,7 +10,7 @@
     </div>
 
     <!-- pagination links -->
-     <div class=" mt-4">
+    <div class=" mt-4">
         {{ $users->links() }}
-     </div>
-    </x-layout>
+    </div>
+</x-layout>

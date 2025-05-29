@@ -9,11 +9,7 @@ class Addresses extends Model
 {
     use HasFactory;
     protected $table = 'addresses';
-    protected $fillable = [
-        'province',
-        'city',
-        'barangay',
-    ];
+    protected $guarded = [];
 
 }
 
