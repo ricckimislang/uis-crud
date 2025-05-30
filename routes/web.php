@@ -41,7 +41,7 @@ Route::get('/user/{id}', function ($id) {
 //Edit User Details
 Route::get('/user/{id}/edit', function ($id) {
 
-    $user = User::with('userDetails', 'userAddress')->find($id);
+    $user = User::with('userDetails', 'userAddress')->findOrFail($id);
 
     if (!$user) {
         abort(404);
@@ -71,8 +71,6 @@ Route::post('/users', function () {
         'street' => 'required|string|max:50',
     ]);
 
-
-
     try {
         DB::beginTransaction();
         $user = createuser($data);
@@ -95,6 +93,7 @@ Route::post('/users', function () {
 
 // update user details
 Route::patch('/user/{id}', function ($id) {
+    // validate
     $data = request()->validate([
         'name' => 'required|string|max:50',
         'email' => 'required|email|unique:users',
@@ -107,15 +106,13 @@ Route::patch('/user/{id}', function ($id) {
         'street' => 'required|string|max:50',
     ]);
 
-    $user = User::with('userDetails', 'userAddress')->find($id);
+    // authorize (On Hold...)
 
-    if (!$user) {
-        abort(404);
-    }
+    $user = User::findOrFail($id);
 
     try {
         DB::beginTransaction();
-        $user = updateuser($data);
+        $user = updateuser($data, $user->id);
 
         if ($user) {
             DB::commit();
@@ -131,6 +128,15 @@ Route::patch('/user/{id}', function ($id) {
         session()->flash('error', $e->getMessage());
         return redirect('/user/' . $id . '/edit');
     }
+});
+
+// destroy
+Route::delete('/user/{id}', function ($id) {
+    $user = User::find($id);
+    if (!$user) {
+        abort(404);
+    }
+    $user->delete();
 });
 
 
@@ -164,9 +170,27 @@ function createuser($data): User
 }
 
 // update user
-// function updateuser($data):User
-// {
-//     $user->
+function updateuser($data, $id): bool 
+{
+    $user = User::findOrFail($id);
 
-//     return $user;
-// }
+    $user->update([
+        'name' => $data['name'],
+        'email' => $data['email'],
+    ]);
+
+    $user->userDetails()->update([
+        'contact' => $data['contact'],
+        'age' => $data['age'],
+        'gender' => $data['gender'],
+        'occupation' => $data['occupation'],
+    ]);
+
+    $user->userAddress()->update([
+        'province' => $data['province'],
+        'city' => $data['city'],
+        'barangay' => $data['street']
+    ]);
+
+    return true;
+}
