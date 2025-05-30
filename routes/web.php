@@ -132,11 +132,24 @@ Route::patch('/user/{id}', function ($id) {
 
 // destroy
 Route::delete('/user/{id}', function ($id) {
-    $user = User::find($id);
-    if (!$user) {
-        abort(404);
+    try {
+        DB::beginTransaction();
+        $user = deleteuser($id);
+
+        if ($user) {
+            DB::commit();
+            session()->flash('success', 'User deleted successfully');
+            return redirect('/users');
+        } else {
+            DB::rollBack();
+            session()->flash('error', 'Failed to delete user');
+            return redirect('/users');
+        }
+    } catch (\Exception $e) {
+        DB::rollBack();
+        session()->flash('error', $e->getMessage());
+        return redirect('/users');
     }
-    $user->delete();
 });
 
 
@@ -170,7 +183,7 @@ function createuser($data): User
 }
 
 // update user
-function updateuser($data, $id): bool 
+function updateuser($data, $id): bool
 {
     $user = User::findOrFail($id);
 
@@ -192,5 +205,12 @@ function updateuser($data, $id): bool
         'barangay' => $data['street']
     ]);
 
+    return true;
+}
+
+function deleteuser($id): bool
+{
+    $user = User::findOrFail($id);
+    $user->delete();
     return true;
 }

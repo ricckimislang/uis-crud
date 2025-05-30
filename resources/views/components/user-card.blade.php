@@ -73,7 +73,7 @@
         </div>
     </div>
     @if (isset($button))
-        <div class="flex justify-end items-center space-x-2 mt-4">
+        <div class="flex justify-end items-center space-x-2 mt-4 ">
             {{ $button }}
         </div>
     @endif
