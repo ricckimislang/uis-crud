@@ -72,8 +72,9 @@
             </div>
         </div>
     </div>
-    <div class="flex justify-end mt-6">
-        <a href="/users"
-            class="btn btn-sm bg-blue-500 text-white rounded-md hover:bg-blue-600 px-4 py-2 transition">Back</a>
-    </div>
+    @if (isset($button))
+        <div class="flex justify-end items-center space-x-2 mt-4">
+            {{ $button }}
+        </div>
+    @endif
 </div>

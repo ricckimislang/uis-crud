@@ -5,6 +5,7 @@ import './toastr-setup';
 document.addEventListener('DOMContentLoaded', () => {
     const success = document.getElementById('flash-success');
     const error = document.getElementById('flash-error');
+    const validationErrors = document.getElementById('flash-validationErrors');
     const warning = document.getElementById('flash-warning');
     const info = document.getElementById('flash-info');
 
@@ -22,5 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (info && info.value) {
         toastr.info(info.value);
+    }
+    if (validationErrors && validationErrors.value) {
+        const errors = validationErrors.value.split('|');
+        errors.forEach(error => {
+            toastr.error(error);
+        });
     }
 });

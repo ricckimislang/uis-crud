@@ -1,15 +1,33 @@
-@if (session('success'))
-    <input type="hidden" id="flash-success" value="{{ session('success') }}">
-@endif
+@if (
+    session('success') ||
+    session('error') ||
+    session('warning') ||
+    session('info') ||
+    $errors->any()
+)
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            @if (session('success'))
+                toastr.success("{{ session('success') }}");
+            @endif
 
-@if (session('error'))
-    <input type="hidden" id="flash-error" value="{{ session('error') }}">
-@endif
+            @if (session('error'))
+                toastr.error("{{ session('error') }}");
+            @endif
 
-@if (session('warning'))
-    <input type="hidden" id="flash-warning" value="{{ session('warning') }}">
-@endif
+            @if (session('warning'))
+                toastr.warning("{{ session('warning') }}");
+            @endif
 
-@if (session('info'))
-    <input type="hidden" id="flash-info" value="{{ session('info') }}">
+            @if (session('info'))
+                toastr.info("{{ session('info') }}");
+            @endif
+
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    toastr.error("{{ $error }}", "Validation Error");
+                @endforeach
+            @endif
+        });
+    </script>
 @endif 

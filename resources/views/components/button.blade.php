@@ -1,7 +1,7 @@
 @props(['type' => 'a'])
 
 @if ($type === 'a')
-<a {{ $attributes->merge(['class' => ''  ]) }}>
+<a {{ $attributes->merge(['class' => 'btn'  ]) }}>
     {{ $slot }}
 </a>
 
